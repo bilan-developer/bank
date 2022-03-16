@@ -1,0 +1,20 @@
+.page{
+    width: 100%;
+}
+.v-main__wrap{
+    .container{
+        align-items: flex-start!important;
+    }
+}
+.v-overlay__scrim, .v-overlay__content{
+    z-index: 1000!important;
+}
+.v-dialog__content{
+    z-index: 1;
+}
+.height-100{
+    height: 100%;
+}
+.chip-rate{
+    min-width: 100px;
+}

@@ -1,0 +1,33 @@
+// Body
+$body-bg: #E5E5E5;
+
+// Typography
+$font-family-sans-serif: 'ProximaNova', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+//Typography color
+$headingColor:#000000;
+$subHeadingColor:#A1A1A1;
+$bodyText:#4B4B4B;
+$offerColor:#C8C8C8;
+
+// Colors
+$main-colors: #fff;
+$second-colors:#1D81CD;
+$linkColor: #898989;
+
+//font-size
+$heading:3rem;
+$subHeading:2.25rem;
+$textBody:1.5rem;
+
+$borderColor:#E7E7E7;
+$iconWriteColor:#FB9F00;
+$showColorBg:#D7EEFF;
+$offerItemColor:#F5F6FA;
+$offerItemTiteColor:#C8C8C8;
+
+@mixin transition  {
+  transition: .2s all;
+}

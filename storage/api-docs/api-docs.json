@@ -1,0 +1,391 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Base Controller",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/autocomplete/terminals": {
+            "get": {
+                "tags": [
+                    "Autocomplete"
+                ],
+                "operationId": "App\\Http\\Controllers\\Api\\AutocompleteController::terminals",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Строка поиска",
+                        "required": true,
+                        "example": "Киев"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Terminal"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/flight/search": {
+            "post": {
+                "tags": [
+                    "Flight"
+                ],
+                "summary": "Запуск поиска авиа.",
+                "operationId": "addPet",
+                "requestBody": {
+                    "description": "",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/FlightRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "storage_id": {
+                                                        "description": "=Хэш хранилища",
+                                                        "type": "string",
+                                                        "example": "cac720ee53c293eb2617158032fb2aa4"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/flight/search/fetch/{storage_id}": {
+            "get": {
+                "tags": [
+                    "Flight"
+                ],
+                "summary": "Получить результат поиска.",
+                "operationId": "App\\Http\\Controllers\\Api\\FlightController::fetch",
+                "parameters": [
+                    {
+                        "name": "storageId",
+                        "in": "path",
+                        "description": "Хэш хранилища в который сложился результат",
+                        "required": true,
+                        "example": "cac720ee53c293eb2617158032fb2aa4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Terminal"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/hotel/search": {
+            "post": {
+                "tags": [
+                    "Hotel"
+                ],
+                "summary": "Запуск поиска отелей.",
+                "operationId": "App\\Http\\Controllers\\Api\\HotelController::search",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HotelRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "storage_id": {
+                                                        "description": "=Хэш хранилища",
+                                                        "type": "string",
+                                                        "example": "cac720ee53c293eb2617158032fb2aa4"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/hotel/search/fetch/{storage_id}": {
+            "get": {
+                "tags": [
+                    "Hotel"
+                ],
+                "summary": "Получить результат поиска.",
+                "operationId": "App\\Http\\Controllers\\Api\\HotelController::fetch",
+                "parameters": [
+                    {
+                        "name": "storageId",
+                        "in": "path",
+                        "description": "Хэш хранилища в который сложился результат",
+                        "required": true,
+                        "example": "cac720ee53c293eb2617158032fb2aa4"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Terminal"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "FlightRequest": {
+                "properties": {
+                    "directions": {
+                        "description": "Маршруты авиа",
+                        "type": "array",
+                        "items": {},
+                        "example": [
+                            {
+                                "date_from": "2021-01-11",
+                                "date_to": "2021-01-20",
+                                "terminal_from": {
+                                    "code": "KBP",
+                                    "name": "Борисполь"
+                                },
+                                "terminal_to": {
+                                    "code": "PAR",
+                                    "name": "Париж"
+                                }
+                            }
+                        ]
+                    },
+                    "adults": {
+                        "description": "Количество взрослых",
+                        "type": "intefer",
+                        "example": "1"
+                    },
+                    "children_count": {
+                        "description": "Количество детей",
+                        "type": "intefer",
+                        "example": "2"
+                    },
+                    "children": {
+                        "description": "Возраст детей",
+                        "type": "array",
+                        "items": {},
+                        "example": [
+                            2,
+                            4
+                        ]
+                    },
+                    "air_class": {
+                        "description": "Клас авиа",
+                        "type": "string",
+                        "maxLength": 1,
+                        "example": "Y"
+                    },
+                    "only_refundable": {
+                        "description": "Только возвратные",
+                        "type": "boolean",
+                        "example": "false"
+                    },
+                    "only_with_baggage": {
+                        "description": "Только с багажом",
+                        "type": "boolean",
+                        "example": "false"
+                    },
+                    "type": {
+                        "description": "Тип (Мультисектор = complexRoute, Туда и обратно = both, В одну сторону = oneDirection)",
+                        "type": "boolean",
+                        "example": "both"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "FlightRequest"
+                }
+            },
+            "HotelRequest": {
+                "properties": {
+                    "adults": {
+                        "description": "Количество взрослых",
+                        "type": "intefer",
+                        "example": "1"
+                    },
+                    "children_count": {
+                        "description": "Количество детей",
+                        "type": "intefer",
+                        "example": "2"
+                    },
+                    "children": {
+                        "description": "Возраст детей",
+                        "type": "array",
+                        "items": {},
+                        "example": [
+                            2,
+                            4
+                        ]
+                    },
+                    "country": {
+                        "description": "Код страны",
+                        "type": "string",
+                        "example": "FR"
+                    },
+                    "destination": {
+                        "description": "Код направления",
+                        "type": "string",
+                        "example": "PAR"
+                    },
+                    "date_from": {
+                        "description": "Дата начала",
+                        "type": "string",
+                        "example": "2021-01-20"
+                    },
+                    "date_to": {
+                        "description": "Дата конца",
+                        "type": "string",
+                        "example": "2021-01-27"
+                    },
+                    "night": {
+                        "description": "Количество ночей",
+                        "type": "intefer",
+                        "example": "7"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "HotelRequest"
+                }
+            },
+            "Terminal": {
+                "properties": {
+                    "airports": {
+                        "description": "Аэропорты входящие в петрополию",
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "airports": {
+                                    "type": "array",
+                                    "items": {}
+                                },
+                                "code": {
+                                    "description": "Код аэропорта",
+                                    "type": "string",
+                                    "maxLength": 3,
+                                    "example": "KBP"
+                                },
+                                "metropoli": {
+                                    "description": "Код метрополии в которую входит аэропорт",
+                                    "type": "string",
+                                    "maxLength": 3,
+                                    "example": "IEV"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "example": "Борисполь, Киев"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "code": {
+                        "description": "Код аэропорта",
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "IEV"
+                    },
+                    "metropoli": {
+                        "description": "Код метрополии в которую входит аэропорт",
+                        "type": "string",
+                        "maxLength": 3,
+                        "example": "IEV"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Киев, Украина"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "TerminalResource"
+                }
+            }
+        }
+    }
+}
